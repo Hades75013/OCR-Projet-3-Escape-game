@@ -2,6 +2,7 @@ package main.java.enums;
 
 import main.java.*;
 
+
 public enum ModeDeJeu {
 
     CHALLENGER(1) {
@@ -23,6 +24,8 @@ public enum ModeDeJeu {
         }
     };
 
+    public abstract ModeJeu initJeu(Config config);
+
 
     Integer mode;
 
@@ -40,5 +43,5 @@ public enum ModeDeJeu {
         return null;
     }
 
-    public abstract ModeJeu initJeu(Config config);
+
 }

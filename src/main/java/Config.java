@@ -16,7 +16,7 @@ public class Config {
 
     public Config() throws IOException {
         // TODO trouver le bon chemin relatif
-        FileInputStream fis = new FileInputStream(new File("C:\\Users\\sifk\\IdeaProjects\\Workspace\\escape-game\\src\\main\\resources\\config.properties"));
+        FileInputStream fis = new FileInputStream(new File("C:\\Users\\sifk\\IdeaProjects\\Workspace\\escape-game\\src\\main\\java\\resources\\config.properties"));
         BufferedInputStream bis = new BufferedInputStream(fis);
 
         Properties proprietes = new Properties();

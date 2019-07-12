@@ -4,21 +4,25 @@ import main.java.enums.ModeDeJeu;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Main {
 
 
     public static void main(String[] args) {
+
+        Logger logger = Logger.getLogger("Main");
         Config config;
+
         try {
             config = new Config();
-
             DialogApi dialogApi = new DialogApi();
             Scanner sc = new Scanner(System.in);
             boolean exception;
 
             if (config.getModeDev()) {
-                System.out.println("Mode développeur activé");
+
+                logger.info("Mode développeur activé");
             }
 
             System.out.println("Bienvenue dans le menu principal du jeu Escape Game - ONLINE !");
@@ -33,13 +37,19 @@ public class Main {
             do {
                 exception = SaisiesException.choixMenuOuFinDePartieOK(modeJeu);
                 if (!exception) {
+
+                    logger.info("Mauvaise saisie de l'utilisateur pour le choix : nombre diférents de 1,2 ou 3");
+
                     System.out.print("Veuillez saisir uniquement 1,2 ou 3 svp : ");
                     modeJeu = sc.nextInt();
                 }
-            } while (modeJeu != 1 && modeJeu != 2 && modeJeu != 3);
+            } while (!exception);
 
 
             ModeDeJeu modeJeuEnum = ModeDeJeu.valueFromInt(modeJeu);
+
+            logger.info("Mode de jeu = " + modeJeuEnum.name());
+
             System.out.println("Le mode de jeu choisi est " + modeJeuEnum.name());
 
             ModeJeu modeJeuObject = modeJeuEnum.initJeu(config);

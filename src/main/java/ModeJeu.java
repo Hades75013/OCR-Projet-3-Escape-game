@@ -4,29 +4,33 @@ import main.java.enums.ModeDeJeu;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public abstract class ModeJeu {
 
-    Scanner sc = new Scanner(System.in);
     DialogApi dialogApi = new DialogApi();
-    Boolean modeDev = false;
+    protected Scanner sc = new Scanner(System.in);
+    protected GameIA gameIA = new GameIA();
+    protected int nbEssais;
+    protected Config config;
+    protected Logger logger = Logger.getLogger("ModeJeu");
 
+    protected String nbMystereIA;
+    protected String propositionIA;
+    protected String reponseIA;
 
-    String nbMystereIA;
-    String propositionIA;
-    String reponseIA;
+    protected String propositionJoueur;
+    protected String reponseJoueur;
 
-    String propositionJoueur;
-    String reponseJoueur;
+    boolean victoireJoueur = true;
+    boolean victoireIA = true;
 
     boolean exceptionChoixMenuOuFinDePartie = true;
-    boolean exceptionNbCaractere = true;
+    boolean exceptionNbCaractere;
     boolean exceptionChiffres = true;
     boolean exceptionSignes = true;
 
 
-    boolean victoireJoueur = true;
-    boolean victoireIA = true;
 
     protected void run() {
     }
@@ -55,6 +59,9 @@ public abstract class ModeJeu {
                 break;
 
             default:
+
+                logger.info("Mauvaise saisie de l'utilisateur pour le choix de fin de partie ");
+
                 System.out.println("Veuillez entrer 1, 2 ou 3 comme valeur svp ! ");
                 messageFinDePartie();
 
@@ -62,6 +69,8 @@ public abstract class ModeJeu {
     }
 
     public void menuModeDeJeu() {
+        logger.info("L'utilisateur a décidé de revenir au menu Mode de jeu");
+
         System.out.println("Selectionnez votre mode de jeu\n" +
                 "1 - Challenger\n" +
                 "2 - Defenseur\n" +
@@ -72,15 +81,21 @@ public abstract class ModeJeu {
         do {
             exceptionChoixMenuOuFinDePartie = SaisiesException.choixMenuOuFinDePartieOK(modeJeu);
             if (exceptionChoixMenuOuFinDePartie = true) {
+
+                logger.info("Mauvaise saisie de l'utilisateur pour le choix du mode de jeu ");
+
                 System.out.print("Veuillez saisir uniquement 1,2 ou 3 svp : ");
                 modeJeu = sc.nextInt();
             }
         } while (modeJeu != 1 && modeJeu != 2 && modeJeu != 3);
 
         ModeDeJeu modeJeuEnum = ModeDeJeu.valueFromInt(modeJeu);
+
+        logger.info("le mode de jeu choisi est " + modeJeuEnum.name());
+
         System.out.println("le mode de jeu choisi est " + modeJeuEnum.name());
 
-        Config config = null;
+        config = null;
         try {
             config = new Config();
         } catch (IOException e) {
@@ -93,11 +108,15 @@ public abstract class ModeJeu {
 
 
     public void rejouerMemeModeDeJeu() {
+        logger.info("L'utilisateur a décidé de rejouer au même mode de jeu ");
+
         ModeJeu.this.run();
     }
 
 
     public void quitterJeu() {
+        logger.info("L'utilisateur a décidé de quitter le jeu ");
+
         System.out.println("Merci d'avoir participé, au revoir et à bientot !");
         System.exit(0);
     }

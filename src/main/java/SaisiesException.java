@@ -2,11 +2,11 @@ package main.java;
 
 public class SaisiesException {
 
-    static boolean nbDeCaractereOK(String saisieJoueur) {
+    static boolean nbDeChiffreOK(String saisieJoueur) {
 
         boolean nbDeCaractereOK = false;
 
-        if (saisieJoueur.length() == 4) {
+        if (saisieJoueur.length() == 4 && saisieJoueur.matches("^\\p{Digit}+$")) {
             nbDeCaractereOK = true;
         }
         return nbDeCaractereOK;
@@ -28,32 +28,19 @@ public class SaisiesException {
         boolean signesOK = false;
         char[] signesSaisiesJoueur = saisieJoueur.toCharArray();
 
-        for (char signe : signesSaisiesJoueur) {
-            if (String.valueOf(signe).equals("+") || String.valueOf(signe).equals("-") || String.valueOf(signe).equals("=")) {
+        for (char signe : signesSaisiesJoueur)
+            if (saisieJoueur.length() == 4 && (String.valueOf(signe).contains("+") || String.valueOf(signe).contains("-") || String.valueOf(signe).contains("="))) {
                 signesOK = true;
             }
-        }
+
         return signesOK;
     }
 
 
-    static boolean chiffresOK(String saisieJoueur) {
-
-        boolean chiffresOK = false;
-        char[] signesSaisiesJoueur = saisieJoueur.toCharArray();
-
-        for (char signe : signesSaisiesJoueur) {
-            if (String.valueOf(signe).equals("1") || String.valueOf(signe).equals("2") || String.valueOf(signe).equals("3") || String.valueOf(signe).equals("4")
-                    || String.valueOf(signe).equals("5") || String.valueOf(signe).equals("6") || String.valueOf(signe).equals("7") || String.valueOf(signe).equals("8")
-                    || String.valueOf(signe).equals("9")) {
-                chiffresOK = true;
-            }
-        }
-        return chiffresOK;
-    }
-
-
 }
+
+
+
 
 
 
