@@ -23,7 +23,7 @@ public class SaisiesException {
         return choixMenuOK;
     }
 
-    static boolean signesOK(String saisieJoueur) {
+    static boolean nbDeSignesOK(String saisieJoueur) {
 
         boolean signesOK = true;
         char[] signesSaisiesJoueur = saisieJoueur.toCharArray();

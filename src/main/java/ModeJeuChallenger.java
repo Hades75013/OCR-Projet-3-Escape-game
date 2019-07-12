@@ -51,7 +51,7 @@ public class ModeJeuChallenger extends ModeJeu {
 
 
             //On compare la valeur saisie et celle du nombre mystère
-            reponseIA = gameIA.comparerValeurChallenger(propositionJoueur, nbMystereIA);
+            reponseIA = gameIA.comparerValeur(propositionJoueur, nbMystereIA);
 
             //On affiche le resultat de la comparaison
             dialogApi.afficherResultat(propositionJoueur, reponseIA);

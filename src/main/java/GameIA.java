@@ -7,7 +7,7 @@ public class GameIA {
     }
 
 
-    public String comparerValeurChallenger(String proposition, String nbMystere) {
+    public String comparerValeur(String proposition, String nbMystere) {
 
         char[] propositions = proposition.toCharArray();
         String indication = "";
@@ -62,6 +62,7 @@ public class GameIA {
             } else if (String.valueOf(signe).equals("+")) {
 
                 nouvelleProposition += chiffrePropositionIA + 1;
+
 
             } else if (String.valueOf(signe).equals("-")) {
 

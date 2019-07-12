@@ -1,7 +1,8 @@
 package main.java;
 
 
-import static main.java.SaisiesException.signesOK;
+import static main.java.SaisiesException.nbDeSignesOK;
+
 
 public class ModeJeuDefenseur extends ModeJeu {
 
@@ -30,7 +31,7 @@ public class ModeJeuDefenseur extends ModeJeu {
             do {
                 reponseJoueur = sc.nextLine();
 
-                exceptionNbDeSignes = signesOK(reponseJoueur);
+                exceptionNbDeSignes = nbDeSignesOK(reponseJoueur);
 
                 if (!exceptionNbDeSignes) {
 

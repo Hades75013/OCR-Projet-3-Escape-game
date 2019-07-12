@@ -1,6 +1,10 @@
 package main.java;
 
 
+import static main.java.SaisiesException.nbDeChiffreOK;
+import static main.java.SaisiesException.nbDeSignesOK;
+
+
 public class ModeJeuDuel extends ModeJeu {
 
     public ModeJeuDuel(Config config) {
@@ -38,20 +42,23 @@ public class ModeJeuDuel extends ModeJeu {
         System.out.println();
 
         System.out.print("Veuillez faire une proposition : ");
-        propositionJoueur = sc.nextLine();
 
         do {
-            exceptionNbDeSignes = SaisiesException.signesOK(propositionJoueur);
-            if (exceptionNbDeSignes = true) {
+            propositionJoueur = sc.nextLine();
 
-                logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres());
+            exceptionNbDeChiffre = nbDeChiffreOK(propositionJoueur);
 
-                System.out.print("Veuillez saisir uniquement 4 caractères svp : ");
-                propositionJoueur = sc.nextLine();
+            if (!exceptionNbDeChiffre) {
+
+                logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
+
+                System.out.print("Veuillez saisir uniquement 4 chiffres svp : ");
+
             }
-        } while (propositionJoueur.length() != config.getNbDeChiffres());
 
-        reponseIA = gameIA.comparerValeurChallenger(propositionJoueur, nbMystereIA);
+        } while (!exceptionNbDeChiffre);
+
+        reponseIA = gameIA.comparerValeur(propositionJoueur, nbMystereIA);
         System.out.println("L'ordi vous donne des indications : " + reponseIA);
 
         System.out.println();
@@ -59,18 +66,21 @@ public class ModeJeuDuel extends ModeJeu {
         propositionIA = String.format("%04d", gameIA.genererCombinaisonAleatoire());
         System.out.println("L'ordi propose une combinaison : " + propositionIA);
         System.out.print("Veuillez donnez des indications : ");
-        reponseJoueur = sc.nextLine();
 
         do {
-            exceptionNbDeSignes = SaisiesException.signesOK(reponseJoueur);
-            if (exceptionNbDeSignes = true) {
+            reponseJoueur = sc.nextLine();
 
-                logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres());
+            exceptionNbDeSignes = nbDeSignesOK(reponseJoueur);
 
-                System.out.print("Veuillez saisir uniquement 4 caractères svp : ");
-                reponseJoueur = sc.nextLine();
+            if (!exceptionNbDeSignes) {
+
+                logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un signe +,- ou = ");
+
+                System.out.print("Veuillez saisir uniquement 4 signes (+,- ou =) svp : ");
+
             }
-        } while (reponseJoueur.length() != config.getNbDeChiffres());
+
+        } while (!exceptionNbDeSignes);
 
         System.out.println();
 
@@ -99,16 +109,19 @@ public class ModeJeuDuel extends ModeJeu {
 
                 do {
                     propositionJoueur = sc.nextLine();
-                    exceptionNbDeChiffre = SaisiesException.nbDeChiffreOK(propositionJoueur);
-                    if (exceptionNbDeChiffre = true) {
 
-                        logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres());
+                    exceptionNbDeChiffre = nbDeChiffreOK(propositionJoueur);
 
-                        System.out.print("Veuillez saisir uniquement 4 caractères svp : ");
+                    if (!exceptionNbDeChiffre) {
+
+                        logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
+
+                        System.out.print("Veuillez saisir uniquement 4 chiffres svp : ");
                     }
-                } while (propositionJoueur.length() != config.getNbDeChiffres());
 
-                reponseIA = gameIA.comparerValeurChallenger(propositionJoueur, nbMystereIA);
+                } while (!exceptionNbDeChiffre);
+
+                reponseIA = gameIA.comparerValeur(propositionJoueur, nbMystereIA);
                 System.out.println("L'ordi vous donne des indications : " + reponseIA);
 
                 System.out.println();
@@ -119,15 +132,17 @@ public class ModeJeuDuel extends ModeJeu {
 
                 do {
                     reponseJoueur = sc.nextLine();
-                    exceptionNbDeSignes = SaisiesException.signesOK(reponseJoueur);
-                    if (exceptionNbDeSignes = true) {
 
-                        logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres());
+                    exceptionNbDeSignes = nbDeSignesOK(reponseJoueur);
 
-                        System.out.print("Veuillez saisir uniquement 4 caractères svp : ");
-                        reponseJoueur = sc.nextLine();
+                    if (!exceptionNbDeSignes) {
+
+                        logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un signe +,- ou = ");
+
+                        System.out.print("Veuillez saisir uniquement 4 signes (+,- ou =) svp : ");
                     }
-                } while (reponseJoueur.length() != config.getNbDeChiffres());
+
+                } while (!exceptionNbDeSignes);
 
                 System.out.println();
             }
