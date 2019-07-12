@@ -37,17 +37,17 @@ public class ModeJeuChallenger extends ModeJeu {
 
             do {
 
-                exceptionNbCaractere = nbDeChiffreOK(propositionJoueur);
+                exceptionNbDeChiffre = nbDeChiffreOK(propositionJoueur);
 
-                if (!exceptionNbCaractere) {
+                if (!exceptionNbDeChiffre) {
 
-                    logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres());
+                    logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
 
-                    System.out.print("Veuillez saisir uniquement 4 caractères svp : ");
+                    System.out.print("Veuillez saisir uniquement 4 chiffres svp : ");
                     propositionJoueur = sc.nextLine();
                 }
 
-            } while (!exceptionNbCaractere);
+            } while (!exceptionNbDeChiffre);
 
 
             //On compare la valeur saisie et celle du nombre mystère

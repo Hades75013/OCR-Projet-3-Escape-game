@@ -30,15 +30,17 @@ public class ModeJeuDefenseur extends ModeJeu {
             do {
                 reponseJoueur = sc.nextLine();
 
-                exceptionNbCaractere = signesOK(reponseJoueur);
+                exceptionNbDeSignes = signesOK(reponseJoueur);
 
-                if (!exceptionNbCaractere) {
-                    logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres());
+                if (!exceptionNbDeSignes) {
 
-                    System.out.print("Veuillez saisir uniquement 4 caractères avec les signes +, - et = svp : ");
+                    logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un signe +,- ou = ");
+
+                    System.out.print("Veuillez saisir uniquement 4 signes (+,- ou =) svp : ");
 
                 }
-            } while (!exceptionNbCaractere);
+
+            } while (!exceptionNbDeSignes);
 
 
             dialogApi.afficherResultat(propositionIA, reponseJoueur);
@@ -57,8 +59,7 @@ public class ModeJeuDefenseur extends ModeJeu {
                 System.out.println("Proposition de l'IA : " + propositionIA);
             }
 
-        }
-        while (!victoireIA && nbEssais < config.getNbEssaisMax());
+        } while (!victoireIA && nbEssais < config.getNbEssaisMax());
 
         if (nbEssais == config.getNbEssaisMax()) {
 

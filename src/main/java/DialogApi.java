@@ -33,13 +33,13 @@ public class DialogApi {
     }
 
 
-    public Integer choixFinPartie() {
+    public String choixFinPartie() {
         System.out.println("Que désirez-vous faire à présent ? \n" +
                 "1 - Rejouer au meme mode ? \n" +
                 "2 - Lancer un autre mode ? \n" +
                 "3 - Quitter l'application ? \n");
         System.out.print(CHOIXFINPARTIE);
-        return sc.nextInt();
+        return sc.nextLine();
     }
 
 }

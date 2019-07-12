@@ -13,25 +13,32 @@ public class SaisiesException {
     }
 
 
-    static boolean choixMenuOuFinDePartieOK(Integer saisieJoueur) {
+    static boolean choixMenuOK(Integer saisieJoueur) {
 
-        boolean choixMenuOuFinDePartieOK = false;
+        boolean choixMenuOK = false;
 
         if (saisieJoueur == 1 || saisieJoueur == 2 || saisieJoueur == 3) {
-            choixMenuOuFinDePartieOK = true;
+            choixMenuOK = true;
         }
-        return choixMenuOuFinDePartieOK;
+        return choixMenuOK;
     }
 
     static boolean signesOK(String saisieJoueur) {
 
-        boolean signesOK = false;
+        boolean signesOK = true;
         char[] signesSaisiesJoueur = saisieJoueur.toCharArray();
 
-        for (char signe : signesSaisiesJoueur)
-            if (saisieJoueur.length() == 4 && (String.valueOf(signe).contains("+") || String.valueOf(signe).contains("-") || String.valueOf(signe).contains("="))) {
-                signesOK = true;
+        if (saisieJoueur.length() != 4) {
+            signesOK = false;
+        }
+
+        for (char signe : signesSaisiesJoueur) {
+            if ((!String.valueOf(signe).equals("+")
+                    && !String.valueOf(signe).equals("-")
+                    && !String.valueOf(signe).equals("="))) {
+                signesOK = false;
             }
+        }
 
         return signesOK;
     }

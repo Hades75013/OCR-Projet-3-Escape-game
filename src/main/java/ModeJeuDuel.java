@@ -41,8 +41,8 @@ public class ModeJeuDuel extends ModeJeu {
         propositionJoueur = sc.nextLine();
 
         do {
-            exceptionNbCaractere = SaisiesException.signesOK(propositionJoueur);
-            if (exceptionNbCaractere = true) {
+            exceptionNbDeSignes = SaisiesException.signesOK(propositionJoueur);
+            if (exceptionNbDeSignes = true) {
 
                 logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres());
 
@@ -62,8 +62,8 @@ public class ModeJeuDuel extends ModeJeu {
         reponseJoueur = sc.nextLine();
 
         do {
-            exceptionNbCaractere = SaisiesException.signesOK(reponseJoueur);
-            if (exceptionNbCaractere = true) {
+            exceptionNbDeSignes = SaisiesException.signesOK(reponseJoueur);
+            if (exceptionNbDeSignes = true) {
 
                 logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres());
 
@@ -99,8 +99,8 @@ public class ModeJeuDuel extends ModeJeu {
 
                 do {
                     propositionJoueur = sc.nextLine();
-                    exceptionNbCaractere = SaisiesException.signesOK(propositionJoueur);
-                    if (exceptionNbCaractere = true) {
+                    exceptionNbDeChiffre = SaisiesException.nbDeChiffreOK(propositionJoueur);
+                    if (exceptionNbDeChiffre = true) {
 
                         logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres());
 
@@ -119,8 +119,8 @@ public class ModeJeuDuel extends ModeJeu {
 
                 do {
                     reponseJoueur = sc.nextLine();
-                    exceptionNbCaractere = SaisiesException.signesOK(reponseJoueur);
-                    if (exceptionNbCaractere = true) {
+                    exceptionNbDeSignes = SaisiesException.signesOK(reponseJoueur);
+                    if (exceptionNbDeSignes = true) {
 
                         logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres());
 

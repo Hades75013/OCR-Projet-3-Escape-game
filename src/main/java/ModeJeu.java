@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import static main.java.SaisiesException.choixMenuOK;
+
 public abstract class ModeJeu {
 
     DialogApi dialogApi = new DialogApi();
@@ -25,10 +27,9 @@ public abstract class ModeJeu {
     boolean victoireJoueur = true;
     boolean victoireIA = true;
 
-    boolean exceptionChoixMenuOuFinDePartie = true;
-    boolean exceptionNbCaractere;
-    boolean exceptionChiffres = true;
-    boolean exceptionSignes = true;
+    boolean exceptionChoixMenu;
+    boolean exceptionNbDeChiffre;
+    boolean exceptionNbDeSignes;
 
 
 
@@ -43,18 +44,18 @@ public abstract class ModeJeu {
 
     public void messageFinDePartie() {
 
-        int choixOption = dialogApi.choixFinPartie();
+        String choixOption = dialogApi.choixFinPartie();
 
         switch (choixOption) {
-            case 1:
+            case "1":
                 rejouerMemeModeDeJeu();
                 break;
 
-            case 2:
+            case "2":
                 menuModeDeJeu();
                 break;
 
-            case 3:
+            case "3":
                 quitterJeu();
                 break;
 
@@ -79,15 +80,15 @@ public abstract class ModeJeu {
         Integer modeJeu = dialogApi.ChoixModeJeu();
 
         do {
-            exceptionChoixMenuOuFinDePartie = SaisiesException.choixMenuOuFinDePartieOK(modeJeu);
-            if (exceptionChoixMenuOuFinDePartie = true) {
+            exceptionChoixMenu = choixMenuOK(modeJeu);
+            if (!exceptionChoixMenu) {
 
                 logger.info("Mauvaise saisie de l'utilisateur pour le choix du mode de jeu ");
 
                 System.out.print("Veuillez saisir uniquement 1,2 ou 3 svp : ");
                 modeJeu = sc.nextInt();
             }
-        } while (modeJeu != 1 && modeJeu != 2 && modeJeu != 3);
+        } while (!exceptionChoixMenu);
 
         ModeDeJeu modeJeuEnum = ModeDeJeu.valueFromInt(modeJeu);
 

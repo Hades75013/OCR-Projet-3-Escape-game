@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import static main.java.SaisiesException.choixMenuOK;
+
 public class Main {
 
 
@@ -35,7 +37,7 @@ public class Main {
             Integer modeJeu = dialogApi.ChoixModeJeu();
 
             do {
-                exception = SaisiesException.choixMenuOuFinDePartieOK(modeJeu);
+                exception = choixMenuOK(modeJeu);
                 if (!exception) {
 
                     logger.info("Mauvaise saisie de l'utilisateur pour le choix : nombre diférents de 1,2 ou 3");
