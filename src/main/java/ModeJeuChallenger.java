@@ -4,7 +4,7 @@ package main.java;
 import static main.java.SaisiesException.nbDeChiffreOK;
 
 
-public class ModeJeuChallenger extends ModeJeu {
+public class ModeJeuChallenger extends ModeDeJeu {
 
     public ModeJeuChallenger(Config config) {
         this.config = config;

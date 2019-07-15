@@ -4,7 +4,7 @@ package main.java;
 import static main.java.SaisiesException.nbDeSignesOK;
 
 
-public class ModeJeuDefenseur extends ModeJeu {
+public class ModeJeuDefenseur extends ModeDeJeu {
 
     public ModeJeuDefenseur(Config config) {
         this.config = config;
@@ -51,7 +51,7 @@ public class ModeJeuDefenseur extends ModeJeu {
             victoireIA = isWin(reponseJoueur);
 
             if (victoireIA) {
-                System.out.println("Désolé, vous avez perdu ! L'ordinateur a réussi à deviner votre combinaison secrète en " + (nbEssais) + " essai(s)\n");
+                System.out.print("Désolé, vous avez perdu ! L'ordinateur a réussi à deviner votre combinaison secrète en " + (nbEssais) + " essai(s)\n");
 
                 logger.info("victoire de l'ordinateur");
 
@@ -70,7 +70,6 @@ public class ModeJeuDefenseur extends ModeJeu {
 
         }
 
-        System.out.println();
 
         messageFinDePartie();
 

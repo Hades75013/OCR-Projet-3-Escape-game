@@ -13,12 +13,12 @@ public class SaisiesException {
     }
 
 
-    static boolean choixMenuOK(Integer saisieJoueur) {
+    static boolean choixMenuOK(String saisieJoueur) {
 
-        boolean choixMenuOK = false;
+        boolean choixMenuOK = true;
 
-        if (saisieJoueur == 1 || saisieJoueur == 2 || saisieJoueur == 3) {
-            choixMenuOK = true;
+        if (!String.valueOf(saisieJoueur).equals("1") && !String.valueOf(saisieJoueur).equals("2") && !String.valueOf(saisieJoueur).equals("3")) {
+            choixMenuOK = false;
         }
         return choixMenuOK;
     }

@@ -5,7 +5,7 @@ import static main.java.SaisiesException.nbDeChiffreOK;
 import static main.java.SaisiesException.nbDeSignesOK;
 
 
-public class ModeJeuDuel extends ModeJeu {
+public class ModeJeuDuel extends ModeDeJeu {
 
     public ModeJeuDuel(Config config) {
         this.config = config;

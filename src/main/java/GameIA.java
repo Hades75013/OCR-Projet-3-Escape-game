@@ -7,22 +7,19 @@ public class GameIA {
     }
 
 
-    public String comparerValeur(String proposition, String nbMystere) {
+    public String comparerValeur(String propositionJoueur, String nbMystereIA) {
 
-        char[] propositions = proposition.toCharArray();
+        char[] propositionsJoueur = propositionJoueur.toCharArray();
         String indication = "";
         int i = 0;
 
-        for (char c : propositions) {
-            char reponse = nbMystere.charAt(i);
+        for (int chiffre : propositionsJoueur) {
+            int chiffreMystere = nbMystereIA.charAt(i);
 
-            int charProposition = (int) c;
-            int charNbMystere = (int) reponse;
-
-            if (charProposition == charNbMystere) {
+            if (chiffre == chiffreMystere) {
                 indication += "=";
 
-            } else if (charProposition > charNbMystere) {
+            } else if (chiffre > chiffreMystere) {
                 indication += "-";
 
             } else {
@@ -60,14 +57,20 @@ public class GameIA {
                 nouvelleProposition += chiffrePropositionIA;
 
             } else if (String.valueOf(signe).equals("+")) {
-
+                if ((chiffrePropositionIA + 1) > 9) {
+                    nouvelleProposition += 9;
+                } else {
                 nouvelleProposition += chiffrePropositionIA + 1;
-
+                }
 
             } else if (String.valueOf(signe).equals("-")) {
-
-                nouvelleProposition += chiffrePropositionIA - 1;
+                if ((chiffrePropositionIA - 1) < 0) {
+                    nouvelleProposition += 0;
+                } else {
+                    nouvelleProposition += chiffrePropositionIA - 1;
+                }
             }
+
             i++;
         }
         return nouvelleProposition;

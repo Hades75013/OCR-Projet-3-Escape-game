@@ -16,9 +16,9 @@ public class DialogApi {
     }
 
 
-    public Integer ChoixModeJeu() {
+    public String ChoixModeJeu() {
         System.out.print(CHOIXMODEJEU);
-        return sc.nextInt();
+        return sc.nextLine();
     }
 
 
