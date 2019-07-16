@@ -1,47 +1,54 @@
-package main.java;
+package main.java.ModeDeJeu;
 
+
+import main.java.Config;
+import main.java.DialogApi;
+import main.java.GameIA;
 
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import static main.java.SaisiesException.choixMenuOK;
+import static main.java.Exception.SaisiesException.choixMenuOK;
 
 
 public class ModeDeJeu {
 
     protected Scanner sc = new Scanner(System.in);
     protected GameIA gameIA = new GameIA();
-    protected int nbEssais;
+    protected DialogApi dialogApi = new DialogApi();
     protected Config config;
     protected Logger logger = Logger.getLogger("");
+
     protected String nbMystereIA;
     protected String propositionIA;
     protected String reponseIA;
+
     protected String propositionJoueur;
     protected String reponseJoueur;
-    DialogApi dialogApi = new DialogApi();
-    boolean victoireJoueur = true;
-    boolean victoireIA = true;
 
-    boolean exceptionNbDeChiffre;
-    boolean exceptionNbDeSignes;
+    protected int nbEssais;
 
+    protected boolean victoireJoueur;
+    protected boolean victoireIA;
 
+    protected boolean exceptionNbDeChiffre;
+    protected boolean exceptionNbDeSignes;
+
+    //Méthode abstraite redéfinie dans les classes filles permettant de lancer les différents modes de jeu
     protected void run() {
     }
 
-
-    public boolean isWin(String signe) {
+    //Méthode booléenne permettant de tester la victoire
+    protected boolean isWin(String signe) {
         return signe.equals("====");
     }
 
-
-    public void messageFinDePartie() {
+    //Méthode permettant de choisir les options de fin de partie
+    protected void finDePartie() {
 
         boolean exceptionFinDePartie;
         String choixOption = dialogApi.choixFinPartie();
-
 
         do {
             exceptionFinDePartie = choixMenuOK(choixOption);
@@ -52,9 +59,7 @@ public class ModeDeJeu {
                 System.out.print("Veuillez saisir uniquement 1, 2 ou 3 comme valeurs svp : ");
                 choixOption = sc.nextLine();
             }
-
         } while (!exceptionFinDePartie);
-
 
         switch (choixOption) {
             case "1":
@@ -81,12 +86,12 @@ public class ModeDeJeu {
         }
     }
 
-
-    public void rejouerMemeModeDeJeu() {
+    //Méthode permettant de rejouer la même partie
+    protected void rejouerMemeModeDeJeu() {
         ModeDeJeu.this.run();
     }
 
-
+    //Méthode permettant de revenir au menu Mode de jeu
     public void menuModeDeJeu() {
 
         config = null;
@@ -96,8 +101,7 @@ public class ModeDeJeu {
             e.printStackTrace();
         }
 
-
-        System.out.println("Selectionnez votre mode de jeu\n" +
+        System.out.println("Veuillez sélectionner votre mode de jeu\n" +
                 "1 - Challenger\n" +
                 "2 - Defenseur\n" +
                 "3 - Duel\n");
@@ -114,9 +118,7 @@ public class ModeDeJeu {
                 System.out.print("Veuillez saisir uniquement 1, 2 ou 3 comme valeurs svp : ");
                 choixModeJeu = sc.nextLine();
             }
-
         } while (!exceptionMenuModeJeu);
-
 
         switch (choixModeJeu) {
             case "1":
@@ -146,10 +148,9 @@ public class ModeDeJeu {
             default:
 
         }
-
     }
 
-
+    //Méthode permettant de quitter le jeu
     public void quitterJeu() {
         System.exit(0);
     }

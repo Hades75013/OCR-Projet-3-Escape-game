@@ -1,7 +1,9 @@
-package main.java;
+package main.java.ModeDeJeu;
 
 
-import static main.java.SaisiesException.nbDeChiffreOK;
+import main.java.Config;
+
+import static main.java.Exception.SaisiesException.nbDeChiffreOK;
 
 
 public class ModeJeuChallenger extends ModeDeJeu {
@@ -19,9 +21,10 @@ public class ModeJeuChallenger extends ModeDeJeu {
 
         System.out.println();
 
-        //Generation de la combinaison aléatoire par l'ordinateur
+        //Génération de la combinaison aléatoire par l'ordinateur
         nbMystereIA = String.format("%04d", gameIA.genererCombinaisonAleatoire());
 
+        //On questionne si le mode développeur est activé
         if (config.getModeDev()) {
 
             System.out.println("(nbMystereIA = " + nbMystereIA + ")");
@@ -29,40 +32,41 @@ public class ModeJeuChallenger extends ModeDeJeu {
 
         nbEssais = 0;
 
-        //On boucle tant que les conditions de la victoire ne sont pas réunies
+        //On boucle tant que les conditions de la victoire ne sont pas réunies et que l'on n'a pas dépassé le nombre d'essais max
         do {
-            //On demande à l'utilisateur de faire une proposition en saisissant une valeur
+            System.out.println();
 
+            //On demande à l'utilisateur de faire une proposition en saisissant une valeur
             propositionJoueur = dialogApi.entrerProposition();
 
+            //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
             do {
-
                 exceptionNbDeChiffre = nbDeChiffreOK(propositionJoueur);
 
                 if (!exceptionNbDeChiffre) {
-
                     logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
 
                     System.out.print("Veuillez saisir uniquement 4 chiffres svp : ");
                     propositionJoueur = sc.nextLine();
                 }
-
             } while (!exceptionNbDeChiffre);
 
-
-            //On compare la valeur saisie et celle du nombre mystère
+            //L'ordinateur compare la valeur saisie à celle du nombre mystère
             reponseIA = gameIA.comparerValeur(propositionJoueur, nbMystereIA);
-
-            //On affiche le resultat de la comparaison
-            dialogApi.afficherResultat(propositionJoueur, reponseIA);
-
-            //On questionne le booleen sur les conditions de la victoire
-            victoireJoueur = isWin(reponseIA);
 
             //On incrémente afin d'avoir le nombre d'essais du joueur
             nbEssais++;
 
-        } while (!victoireJoueur && nbEssais <= config.getNbEssaisMax());
+            //On affiche le nombre d'essais en cours
+            System.out.println("Essai N° " + nbEssais);
+
+            //On affiche le resultat de la comparaison
+            dialogApi.afficherResultat(propositionJoueur, reponseIA);
+
+            //On questionne le booléen sur les conditions de la victoire
+            victoireJoueur = isWin(reponseIA);
+
+        } while (!victoireJoueur && nbEssais < config.getNbEssaisMax());
 
         System.out.println();
 
@@ -76,13 +80,14 @@ public class ModeJeuChallenger extends ModeDeJeu {
 
             logger.info("Victoire de l'ordinateur ");
 
-            System.out.println("Désolé, vous avez perdu , vous avez épuisez le nombre de tentatives ! (" + config.getNbEssaisMax() + ")\n" +
+            System.out.println("Désolé, vous avez perdu , vous avez épuisez le nombre de tentatives (" + config.getNbEssaisMax() + ") !\n" +
                     "La combinaison secrète à trouver était : " + nbMystereIA);
         }
 
         System.out.println();
 
-        messageFinDePartie();
+        //On propose à l'utilisateur les options de fin de partie
+        finDePartie();
     }
 
 }
