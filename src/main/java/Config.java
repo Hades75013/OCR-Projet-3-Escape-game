@@ -10,26 +10,30 @@ import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 
 public class Config {
-    public boolean modeDev;
-    public int nbDeChiffres;
-    public int nbEssaisMax;
+    private boolean modeDev;
+    private int nbDeChiffres;
+    private int nbEssaisMax;
 
     public Config() throws IOException {
-        // TODO trouver le bon chemin relatif
+
+        //On lit le fichier de configuration config.properties
         FileInputStream fis = new FileInputStream(new File("C:\\Users\\sifk\\IdeaProjects\\Workspace\\escape-game\\src\\main\\java\\resources\\config.properties"));
         BufferedInputStream bis = new BufferedInputStream(fis);
 
+        //On charge le fichier lu dans l'objet proprietes de la classe Properties
         Properties proprietes = new Properties();
         proprietes.load(bis);
 
         fis.close();
         bis.close();
 
+        //on attribue les valeurs du fichier config au variables de la classe Config
         modeDev = parseBoolean(proprietes.getProperty("modeDev"));
         nbDeChiffres = parseInt(proprietes.getProperty("nbDeChiffres"));
         nbEssaisMax = parseInt(proprietes.getProperty("nbEssaisMax"));
     }
 
+    //On crée des getters pour chaques variables afin de pouvoir les utiliser en dehors de cette classe
     public boolean getModeDev() {
         return modeDev;
     }

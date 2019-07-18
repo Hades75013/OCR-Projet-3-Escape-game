@@ -16,19 +16,19 @@ public class DialogApi {
     public DialogApi() {
     }
 
-    //Méthode permettant de saisir le choix du mode de jeu
+    //Méthode permettant à l'utilisateur de saisir le choix du mode de jeu
     public String ChoixModeJeu() {
         System.out.print(CHOIXMODEJEU);
         return sc.nextLine();
     }
 
-    //Méthode permettant de saisir une proposition
+    //Méthode permettant à l'utilisateur de saisir une proposition
     public String entrerProposition() {
         System.out.print(ENTRER_PROPOSITION);
         return sc.nextLine();
     }
 
-    //Méthode permettant de saisir une réponse
+    //Méthode permettant à l'utilisateur de saisir une réponse
     public String entrerReponse() {
         System.out.print(ENTRER_REPONSE);
         return sc.nextLine();
@@ -39,7 +39,7 @@ public class DialogApi {
         System.out.println(PROPOSITION + proposition + REPONSE + reponseIndication);
     }
 
-    //Méthode permettant de saisir le choix de fin de partie
+    //Méthode permettant à l'utilisateur de selectionner le choix de fin de partie
     public String choixFinPartie() {
         System.out.println("Que désirez-vous faire à présent ? \n" +
                 "1 - Rejouer au meme mode ? \n" +
