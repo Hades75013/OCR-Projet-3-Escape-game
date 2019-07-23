@@ -3,8 +3,6 @@ package main.java.ModeDeJeu;
 
 import main.java.Config;
 
-import static main.java.Exception.SaisiesException.nbDeSignesOK;
-
 
 public class ModeJeuDefenseur extends ModeDeJeu {
 
@@ -30,22 +28,13 @@ public class ModeJeuDefenseur extends ModeDeJeu {
 
         nbEssais = 0;
 
-        //On boucle tant que les conditions de la victoire ne sont pas réunies et que l'on n'a pas atteint le nombre d'essais max
+        //On boucle tant que les conditions de la victoire de l'ordinateur ne sont pas réunies et que l'on n'a pas atteint le nombre d'essais max
         do {
             //On demande à l'utilisateur de rendre une réponse en saisissant les signes +,- ou =
             reponseJoueur = dialogApi.entrerReponse();
 
             //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
-            do {
-                exceptionNbDeSignes = nbDeSignesOK(reponseJoueur);
-
-                if (!exceptionNbDeSignes) {
-                    logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un signe +,- ou = ");
-
-                    System.out.print("Veuillez saisir uniquement 4 signes (+,- ou =) svp : ");
-                    reponseJoueur = sc.nextLine();
-                }
-            } while (!exceptionNbDeSignes);
+            verifSignes();
 
             //On incrémente afin d'avoir le nombre d'essais du joueur
             nbEssais++;
@@ -56,9 +45,8 @@ public class ModeJeuDefenseur extends ModeDeJeu {
             //On affiche le resultat de la comparaison
             dialogApi.afficherResultat(propositionIA, reponseJoueur);
 
-
             //On questionne le booléen sur les conditions de la victoire
-            victoireIA = isWin(reponseJoueur);
+            victoireIA = gagneOK(reponseJoueur);
 
             //Si victoire de l'ordinateur au premier essai
             if (victoireIA) {
@@ -84,10 +72,14 @@ public class ModeJeuDefenseur extends ModeDeJeu {
             System.out.println("Bravo, vous avez gagné ! L'ordinateur n'a pas réussi à deviner votre combinaison secrète en " + config.getNbEssaisMax() + " essais!");
         }
 
+        System.out.println();
+
         //On propose à l'utilisateur les options de fin de partie
         finDePartie();
 
     }
+
+
 }
 
 

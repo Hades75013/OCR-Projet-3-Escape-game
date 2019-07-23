@@ -3,7 +3,7 @@ package main.java;
 
 public class GameIA {
 
-
+    //Constructeur
     public GameIA() {
     }
 

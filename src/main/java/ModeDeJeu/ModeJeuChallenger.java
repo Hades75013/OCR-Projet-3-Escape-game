@@ -3,8 +3,6 @@ package main.java.ModeDeJeu;
 
 import main.java.Config;
 
-import static main.java.Exception.SaisiesException.nbDeChiffreOK;
-
 
 public class ModeJeuChallenger extends ModeDeJeu {
 
@@ -40,16 +38,7 @@ public class ModeJeuChallenger extends ModeDeJeu {
             propositionJoueur = dialogApi.entrerProposition();
 
             //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
-            do {
-                exceptionNbDeChiffre = nbDeChiffreOK(propositionJoueur);
-
-                if (!exceptionNbDeChiffre) {
-                    logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
-
-                    System.out.print("Veuillez saisir uniquement 4 chiffres svp : ");
-                    propositionJoueur = sc.nextLine();
-                }
-            } while (!exceptionNbDeChiffre);
+            verifChiffres();
 
             //L'ordinateur compare la valeur saisie à celle du nombre mystère
             reponseIA = gameIA.comparerValeur(propositionJoueur, nbMystereIA);
@@ -64,7 +53,7 @@ public class ModeJeuChallenger extends ModeDeJeu {
             dialogApi.afficherResultat(propositionJoueur, reponseIA);
 
             //On questionne le booléen sur les conditions de la victoire
-            victoireJoueur = isWin(reponseIA);
+            victoireJoueur = gagneOK(reponseIA);
 
         } while (!victoireJoueur && nbEssais < config.getNbEssaisMax());
 
@@ -89,6 +78,7 @@ public class ModeJeuChallenger extends ModeDeJeu {
         //On propose à l'utilisateur les options de fin de partie
         finDePartie();
     }
+
 
 }
 

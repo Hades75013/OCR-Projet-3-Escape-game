@@ -14,6 +14,7 @@ public class Config {
     private int nbDeChiffres;
     private int nbEssaisMax;
 
+    //Constructeur
     public Config() throws IOException {
 
         //On lit le fichier de configuration config.properties
@@ -27,13 +28,13 @@ public class Config {
         fis.close();
         bis.close();
 
-        //on attribue les valeurs du fichier config au variables de la classe Config
+        //on attribue les valeurs du fichier config aux variables de la classe Config
         modeDev = parseBoolean(proprietes.getProperty("modeDev"));
         nbDeChiffres = parseInt(proprietes.getProperty("nbDeChiffres"));
         nbEssaisMax = parseInt(proprietes.getProperty("nbEssaisMax"));
     }
 
-    //On crée des getters pour chaques variables afin de pouvoir les utiliser en dehors de cette classe
+    //On crée des getters pour chaques variables de portée private afin de pouvoir les utiliser en dehors de cette classe
     public boolean getModeDev() {
         return modeDev;
     }

@@ -9,15 +9,14 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import static main.java.Exception.SaisiesException.choixMenuOK;
+import static main.java.Exception.SaisiesException.*;
 
 
 public class ModeDeJeu {
 
-    protected Scanner sc = new Scanner(System.in);
-    protected GameIA gameIA = new GameIA();
-    protected DialogApi dialogApi = new DialogApi();
     protected Config config;
+    protected DialogApi dialogApi = new DialogApi();
+    protected GameIA gameIA = new GameIA();
     protected Logger logger = Logger.getLogger("");
 
     protected String nbMystereIA;
@@ -28,70 +27,77 @@ public class ModeDeJeu {
     protected String reponseJoueur;
 
     protected int nbEssais;
+    protected String choix;
 
     protected boolean victoireJoueur;
     protected boolean victoireIA;
 
-    protected boolean exceptionNbDeChiffre;
-    protected boolean exceptionNbDeSignes;
 
-    //Méthode abstraite redéfinie dans les classes filles permettant de lancer les différents modes de jeu
+    //Méthode redéfinie dans les classes filles permettant de lancer les différents modes de jeu
     protected void run() {
     }
 
     //Méthode booléenne permettant de tester la victoire
-    protected boolean isWin(String signe) {
+    protected boolean gagneOK(String signe) {
         return signe.equals("====");
     }
 
-    //Méthode permettant de choisir les options de fin de partie
-    protected void finDePartie() {
+    //Méthode permettant de verifier la saisie correcte de l'utilisateur pour des chiffres
+    protected void verifChiffres() {
 
-        boolean exceptionFinDePartie;
-        String choixOption = dialogApi.choixFinPartie();
+        Scanner sc = new Scanner(System.in);
+        boolean exceptionNbDeChiffre;
 
         do {
-            exceptionFinDePartie = choixMenuOK(choixOption);
+            exceptionNbDeChiffre = nbDeChiffresOK(propositionJoueur);
 
-            if (!exceptionFinDePartie) {
+            if (!exceptionNbDeChiffre) {
+                logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
+
+                System.out.print("Veuillez saisir uniquement 4 chiffres svp : ");
+                propositionJoueur = sc.nextLine();
+            }
+        } while (!exceptionNbDeChiffre);
+    }
+
+    //Méthode permettant de verifier la saisie correcte de l'utilisateur pour des signes
+    protected void verifSignes() {
+
+        Scanner sc = new Scanner(System.in);
+        boolean exceptionNbDeSignes;
+
+        do {
+            exceptionNbDeSignes = nbDeSignesOK(reponseJoueur);
+
+            if (!exceptionNbDeSignes) {
+                logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un signe +,- ou = ");
+
+                System.out.print("Veuillez saisir uniquement 4 signes (+,- ou =) svp : ");
+                reponseJoueur = sc.nextLine();
+            }
+        } while (!exceptionNbDeSignes);
+    }
+
+    //Méthode permettant de verifier la saisie correcte de l'utilisateur pour le choix du menu ou de la fin de partie
+    protected void verifChoix() {
+
+        Scanner sc = new Scanner(System.in);
+        boolean exceptionChoix;
+
+        do {
+            exceptionChoix = choixOK(choix);
+
+            if (!exceptionChoix) {
                 logger.info("Mauvaise saisie de l'utilisateur pour le choix de jeu ");
 
                 System.out.print("Veuillez saisir uniquement 1, 2 ou 3 comme valeurs svp : ");
-                choixOption = sc.nextLine();
+                choix = sc.nextLine();
             }
-        } while (!exceptionFinDePartie);
-
-        switch (choixOption) {
-            case "1":
-                logger.info("L'utilisateur a décidé de rejouer au meme mode de jeu");
-
-                rejouerMemeModeDeJeu();
-                break;
-
-            case "2":
-                logger.info("L'utilisateur a décidé de revenir au menu Mode de jeu");
-
-                menuModeDeJeu();
-                break;
-
-            case "3":
-                logger.info("L'utilisateur a décidé de quitter le jeu");
-
-                System.out.println("Merci d'avoir participé et à bientot !");
-                quitterJeu();
-                break;
-
-            default:
-
-        }
+        } while (!exceptionChoix);
     }
 
-    //Méthode permettant de rejouer la même partie
-    protected void rejouerMemeModeDeJeu() {
-        ModeDeJeu.this.run();
-    }
 
-    //Méthode permettant de revenir au menu Mode de jeu
+    //Méthode permettant de lancer le Mode de jeu
     public void menuModeDeJeu() {
 
         config = null;
@@ -101,26 +107,11 @@ public class ModeDeJeu {
             e.printStackTrace();
         }
 
-        System.out.println("Veuillez sélectionner votre mode de jeu\n" +
-                "1 - Challenger\n" +
-                "2 - Defenseur\n" +
-                "3 - Duel\n");
+        choix = dialogApi.choixModeJeu();
 
-        boolean exceptionMenuModeJeu;
-        String choixModeJeu = dialogApi.ChoixModeJeu();
+        verifChoix();
 
-        do {
-            exceptionMenuModeJeu = choixMenuOK(choixModeJeu);
-
-            if (!exceptionMenuModeJeu) {
-                logger.info("Mauvaise saisie de l'utilisateur pour le choix de jeu ");
-
-                System.out.print("Veuillez saisir uniquement 1, 2 ou 3 comme valeurs svp : ");
-                choixModeJeu = sc.nextLine();
-            }
-        } while (!exceptionMenuModeJeu);
-
-        switch (choixModeJeu) {
+        switch (choix) {
             case "1":
                 logger.info("L'utilisateur a décidé de jouer au mode Challenger");
 
@@ -150,9 +141,51 @@ public class ModeDeJeu {
         }
     }
 
+
+    //Méthode permettant de choisir les options de fin de partie
+    protected void finDePartie() {
+
+        choix = dialogApi.choixFinPartie();
+
+        verifChoix();
+
+        switch (choix) {
+            case "1":
+                logger.info("L'utilisateur a décidé de rejouer au meme mode de jeu");
+
+                rejouerModeDeJeu();
+                break;
+
+            case "2":
+                logger.info("L'utilisateur a décidé de revenir au menu Mode de jeu");
+
+                menuModeDeJeu();
+                break;
+
+            case "3":
+                logger.info("L'utilisateur a décidé de quitter le jeu");
+
+                System.out.println("Merci d'avoir participé et à bientot !");
+                quitterJeu();
+                break;
+
+            default:
+
+        }
+    }
+
+    //Méthode permettant de rejouer la même partie
+    private void rejouerModeDeJeu() {
+        ModeDeJeu.this.run();
+    }
+
+
     //Méthode permettant de quitter le jeu
-    public void quitterJeu() {
+    private void quitterJeu() {
         System.exit(0);
     }
 
+
 }
+
+

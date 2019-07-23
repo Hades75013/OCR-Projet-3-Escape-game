@@ -3,16 +3,12 @@ package main.java.ModeDeJeu;
 
 import main.java.Config;
 
-import static main.java.Exception.SaisiesException.nbDeChiffreOK;
-import static main.java.Exception.SaisiesException.nbDeSignesOK;
-
 
 public class ModeJeuDuel extends ModeDeJeu {
 
     public ModeJeuDuel(Config config) {
         this.config = config;
     }
-
 
     public void run() {
 
@@ -50,16 +46,7 @@ public class ModeJeuDuel extends ModeDeJeu {
         propositionJoueur = dialogApi.entrerProposition();
 
         //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
-        do {
-            exceptionNbDeChiffre = nbDeChiffreOK(propositionJoueur);
-
-            if (!exceptionNbDeChiffre) {
-                logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
-
-                System.out.print("Veuillez saisir uniquement 4 chiffres svp : ");
-                propositionJoueur = sc.nextLine();
-            }
-        } while (!exceptionNbDeChiffre);
+        verifChiffres();
 
         //L'ordinateur compare la valeur saisie à celle du nombre mystère
         reponseIA = gameIA.comparerValeur(propositionJoueur, nbMystereIA);
@@ -78,16 +65,7 @@ public class ModeJeuDuel extends ModeDeJeu {
         reponseJoueur = dialogApi.entrerReponse();
 
         //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
-        do {
-            exceptionNbDeSignes = nbDeSignesOK(reponseJoueur);
-
-            if (!exceptionNbDeSignes) {
-                logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un signe +,- ou = ");
-
-                System.out.print("Veuillez saisir uniquement 4 signes (+,- ou =) svp : ");
-                reponseJoueur = sc.nextLine();
-            }
-        } while (!exceptionNbDeSignes);
+        verifSignes();
 
         //On affiche le resultat de la comparaison
         dialogApi.afficherResultat(propositionIA, reponseJoueur);
@@ -101,8 +79,8 @@ public class ModeJeuDuel extends ModeDeJeu {
             System.out.println("Tour N° " + nbEssais);
 
             //On questionne les booléens sur les conditions de la victoire de chaque joueur
-            victoireIA = isWin(reponseJoueur);
-            victoireJoueur = isWin(reponseIA);
+            victoireIA = gagneOK(reponseJoueur);
+            victoireJoueur = gagneOK(reponseIA);
 
             //Si victoire de l'un ou de l'autre dès le premier essai
             if (victoireJoueur) {
@@ -125,16 +103,7 @@ public class ModeJeuDuel extends ModeDeJeu {
                 propositionJoueur = dialogApi.entrerProposition();
 
                 //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
-                do {
-                    exceptionNbDeChiffre = nbDeChiffreOK(propositionJoueur);
-
-                    if (!exceptionNbDeChiffre) {
-                        logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
-
-                        System.out.print("Veuillez saisir uniquement 4 chiffres svp : ");
-                        propositionJoueur = sc.nextLine();
-                    }
-                } while (!exceptionNbDeChiffre);
+                verifChiffres();
 
                 //L'ordinateur compare la valeur saisie à celle du nombre mystère
                 reponseIA = gameIA.comparerValeur(propositionJoueur, nbMystereIA);
@@ -152,16 +121,8 @@ public class ModeJeuDuel extends ModeDeJeu {
                 //On demande à l'utilisateur de rendre une réponse en saisissant les signes +,- ou =
                 reponseJoueur = dialogApi.entrerReponse();
 
-                do {
-                    exceptionNbDeSignes = nbDeSignesOK(reponseJoueur);
-
-                    if (!exceptionNbDeSignes) {
-                        logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un signe +,- ou = ");
-
-                        System.out.print("Veuillez saisir uniquement 4 signes (+,- ou =) svp : ");
-                        reponseJoueur = sc.nextLine();
-                    }
-                } while (!exceptionNbDeSignes);
+                //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
+                verifSignes();
 
                 //On affiche le resultat de la comparaison
                 dialogApi.afficherResultat(propositionIA, reponseJoueur);

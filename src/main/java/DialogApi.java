@@ -9,7 +9,11 @@ public class DialogApi {
     private static String PROPOSITION = "Proposition : ";
     private static String REPONSE = " -> Réponse : ";
     private static String CHOIXMODEJEU = "Veuillez choisir un mode de jeu : ";
-    private static String CHOIXFINPARTIE = "Veuillez choisir une option de jeu : ";
+    private static String CHOIXFINPARTIE = "Que désirez-vous faire à présent ? \n" +
+            "1 - Rejouer au même mode ? \n" +
+            "2 - Lancer un autre mode ? \n" +
+            "3 - Quitter l'application ? \n" +
+            "Veuillez choisir une option de jeu : ";
 
     private Scanner sc = new Scanner(System.in);
 
@@ -17,7 +21,13 @@ public class DialogApi {
     }
 
     //Méthode permettant à l'utilisateur de saisir le choix du mode de jeu
-    public String ChoixModeJeu() {
+    public String choixModeJeu() {
+
+        System.out.println("Veuillez sélectionner votre mode de jeu\n" +
+                "1 - Challenger\n" +
+                "2 - Defenseur\n" +
+                "3 - Duel\n");
+
         System.out.print(CHOIXMODEJEU);
         return sc.nextLine();
     }
@@ -41,10 +51,6 @@ public class DialogApi {
 
     //Méthode permettant à l'utilisateur de selectionner le choix de fin de partie
     public String choixFinPartie() {
-        System.out.println("Que désirez-vous faire à présent ? \n" +
-                "1 - Rejouer au meme mode ? \n" +
-                "2 - Lancer un autre mode ? \n" +
-                "3 - Quitter l'application ? \n");
         System.out.print(CHOIXFINPARTIE);
         return sc.nextLine();
     }
