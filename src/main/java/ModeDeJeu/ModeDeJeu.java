@@ -14,6 +14,9 @@ import static main.java.Exception.SaisiesException.*;
 
 public class ModeDeJeu {
 
+    public ModeDeJeu() {
+    }
+
     protected Config config;
     protected DialogApi dialogApi = new DialogApi();
     protected GameIA gameIA = new GameIA();

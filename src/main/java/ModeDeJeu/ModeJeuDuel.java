@@ -42,33 +42,13 @@ public class ModeJeuDuel extends ModeDeJeu {
 
         nbEssais = 0;
 
-        //On demande à l'utilisateur de commencer en premier en faisant une proposition
-        propositionJoueur = dialogApi.entrerProposition();
-
-        //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
-        verifChiffres();
-
-        //L'ordinateur compare la valeur saisie à celle du nombre mystère
-        reponseIA = gameIA.comparerValeur(propositionJoueur, nbMystereIA);
-        System.out.println("L'ordi vous donne des indications à l'aide des signes +, -, et = : " + reponseIA);
-
-        //On affiche le resultat de la comparaison
-        dialogApi.afficherResultat(propositionJoueur, reponseIA);
+        //Echange proposition de l'utilisateur - reponse de l'ordinateur
+        tourJoueur();
 
         System.out.println();
 
-        //C'est au tour de l'ordinateur de commencer en générant une combinaison aléatoire
-        propositionIA = String.format("%04d", gameIA.genererCombinaisonAleatoire());
-        System.out.println("L'ordi propose une combinaison : " + propositionIA);
-
-        //On demande à l'utilisateur de rendre une réponse en saisissant les signes +,- ou =
-        reponseJoueur = dialogApi.entrerReponse();
-
-        //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
-        verifSignes();
-
-        //On affiche le resultat de la comparaison
-        dialogApi.afficherResultat(propositionIA, reponseJoueur);
+        //Echange proposition de l'ordinateur - reponse de l'utilisateur
+        tourIA();
 
         //On boucle tant que les conditions de la victoire de l'utilisateur ou de l'ordinateur ne sont pas réunies
         do {
@@ -99,33 +79,12 @@ public class ModeJeuDuel extends ModeDeJeu {
 
                 System.out.println();
 
-                //On demande à l'utilisateur de faire une proposition
-                propositionJoueur = dialogApi.entrerProposition();
-
-                //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
-                verifChiffres();
-
-                //L'ordinateur compare la valeur saisie à celle du nombre mystère
-                reponseIA = gameIA.comparerValeur(propositionJoueur, nbMystereIA);
-                System.out.println("L'ordi vous donne des indications : " + reponseIA);
-
-                //On affiche le resultat de la comparaison
-                dialogApi.afficherResultat(propositionJoueur, reponseIA);
+                tourJoueur();
 
                 System.out.println();
 
-                //Dorénavant, l'ordinateur fait une proposition mais en prenant en compte les indications de l'utilisateur
-                propositionIA = gameIA.genererCombinaisonParametres(propositionIA, reponseJoueur);
-                System.out.println("L'ordi propose une combinaison : " + propositionIA);
-
-                //On demande à l'utilisateur de rendre une réponse en saisissant les signes +,- ou =
-                reponseJoueur = dialogApi.entrerReponse();
-
-                //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
-                verifSignes();
-
-                //On affiche le resultat de la comparaison
-                dialogApi.afficherResultat(propositionIA, reponseJoueur);
+                //Echange proposition de l'ordinateur avec paramètres - reponse de l'utilisateur
+                tourIAParametres();
             }
 
         } while (!victoireIA && !victoireJoueur);
@@ -135,6 +94,56 @@ public class ModeJeuDuel extends ModeDeJeu {
         //On propose à l'utilisateur les options de fin de partie
         finDePartie();
 
+    }
+
+
+    private void tourJoueur() {
+
+        //On demande à l'utilisateur de commencer en premier en faisant une proposition
+        propositionJoueur = dialogApi.entrerProposition();
+
+        //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
+        verifChiffres();
+
+        //L'ordinateur compare la valeur saisie à celle du nombre mystère
+        reponseIA = gameIA.comparerValeur(propositionJoueur, nbMystereIA);
+        System.out.println("L'ordi vous donne des indications à l'aide des signes +, -, et = : " + reponseIA);
+
+        //On affiche le resultat de la comparaison
+        dialogApi.afficherResultat(propositionJoueur, reponseIA);
+    }
+
+
+    private void tourIA() {
+
+        //C'est au tour de l'ordinateur de commencer en générant une combinaison aléatoire
+        propositionIA = String.format("%04d", gameIA.genererCombinaisonAleatoire());
+        System.out.println("L'ordi propose une combinaison : " + propositionIA);
+
+        //On demande à l'utilisateur de rendre une réponse en saisissant les signes +,- ou =
+        reponseJoueur = dialogApi.entrerReponse();
+
+        //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
+        verifSignes();
+
+        //On affiche le resultat de la comparaison
+        dialogApi.afficherResultat(propositionIA, reponseJoueur);
+    }
+
+
+    private void tourIAParametres() {
+        //Dorénavant, l'ordinateur fait une proposition mais en prenant en compte les indications de l'utilisateur
+        propositionIA = gameIA.genererCombinaisonParametres(propositionIA, reponseJoueur);
+        System.out.println("L'ordi propose une combinaison : " + propositionIA);
+
+        //On demande à l'utilisateur de rendre une réponse en saisissant les signes +,- ou =
+        reponseJoueur = dialogApi.entrerReponse();
+
+        //On s'assure que l'utilisateur ait saisi une valeur correcte à l'aide d'un booléen
+        verifSignes();
+
+        //On affiche le resultat de la comparaison
+        dialogApi.afficherResultat(propositionIA, reponseJoueur);
     }
 }
 
