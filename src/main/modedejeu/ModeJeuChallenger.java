@@ -1,7 +1,7 @@
-package main.java.jeuplusoumoins.modedejeu;
+package main.modedejeu;
 
 
-import main.java.jeuplusoumoins.Config;
+import main.Config;
 
 
 public class ModeJeuChallenger extends ModeDeJeu {

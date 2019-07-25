@@ -1,7 +1,7 @@
-package main.java.ModeDeJeu;
+package main.modedejeu;
 
 
-import main.java.Config;
+import main.Config;
 
 
 public class ModeJeuDefenseur extends ModeDeJeu {
@@ -10,10 +10,10 @@ public class ModeJeuDefenseur extends ModeDeJeu {
         this.config = config;
     }
 
-    public void run() {
+    public void lancerPartie() {
 
-        //Message d'accueil avec énoncé des règles du mode de jeu
-        System.out.println("Bienvenue dans ce mode de jeu ! Voici l'énoncé des règles : \n" +
+        //Message d'accueil avec énoncé des règles du mode de jeuplusoumoins
+        System.out.println("Bienvenue dans ce mode de jeuplusoumoins ! Voici l'énoncé des règles : \n" +
                 "Vous devez définir une combinaison de " + config.getNbDeChiffres() + " chiffres que l'ordinateur doit deviner en " + config.getNbEssaisMax() + " essais maximum !\n" +
                 "A vous de jouer ! Bonne chance !");
 

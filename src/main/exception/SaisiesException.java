@@ -1,4 +1,4 @@
-package main.java.jeuplusoumoins.exception;
+package main.exception;
 
 
 public class SaisiesException {

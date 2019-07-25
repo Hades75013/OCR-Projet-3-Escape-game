@@ -1,4 +1,4 @@
-package main.java;
+package main;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -18,7 +18,7 @@ public class Config {
     public Config() throws IOException {
 
         //On lit le fichier de configuration config.properties
-        FileInputStream fis = new FileInputStream(new File("C:\\Users\\sifk\\IdeaProjects\\Workspace\\escape-game\\src\\main\\java\\resources\\config.properties"));
+        FileInputStream fis = new FileInputStream(new File("C:\\Users\\sifk\\IdeaProjects\\Workspace\\escape-game\\src\\main\\resources\\config.properties"));
         BufferedInputStream bis = new BufferedInputStream(fis);
 
         //On charge le fichier lu dans l'objet proprietes de la classe Properties

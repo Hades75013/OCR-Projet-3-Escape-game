@@ -1,15 +1,15 @@
-package main.java.jeuplusoumoins.modedejeu;
+package main.modedejeu;
 
 
-import main.java.jeuplusoumoins.Config;
-import main.java.jeuplusoumoins.DialogApi;
-import main.java.jeuplusoumoins.GameIA;
+import main.Config;
+import main.GameIA;
+import main.DialogApi;
 
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import static main.java.jeuplusoumoins.exception.SaisiesException.*;
+import static main.exception.SaisiesException.*;
 
 
 public class ModeDeJeu {
@@ -86,7 +86,7 @@ public class ModeDeJeu {
             exceptionChoix = choixOK(choix);
 
             if (!exceptionChoix) {
-                logger.info("Mauvaise saisie de l'utilisateur pour le choix de jeuplusoumoins ");
+                logger.info("Mauvaise saisie de l'utilisateur pour le choix de jeu ");
 
                 System.out.print("Veuillez saisir uniquement 1, 2 ou 3 comme valeurs svp : ");
                 choix = sc.nextLine();

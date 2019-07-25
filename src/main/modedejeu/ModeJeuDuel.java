@@ -1,7 +1,7 @@
-package main.java.ModeDeJeu;
+package main.modedejeu;
 
 
-import main.java.Config;
+import main.Config;
 
 
 public class ModeJeuDuel extends ModeDeJeu {
@@ -10,16 +10,13 @@ public class ModeJeuDuel extends ModeDeJeu {
         this.config = config;
     }
 
-    public void run() {
-
-        //Message d'accueil avec énoncé des règles du mode de jeu
-        System.out.println("Bienvenue dans ce mode de jeu ! Voici l'énoncé des règles : \n" +
+    public void lancerPartie() {
+        //Message d'accueil avec énoncé des règles du mode de jeuplusoumoins
+        System.out.println("Bienvenue dans ce mode de jeuplusoumoins ! Voici l'énoncé des règles : \n" +
                 "Vous devez définir une combinaison de " + config.getNbDeChiffres() + " chiffres que l'ordinateur doit deviner !\n" +
                 "Mais l'ordinateur doit également définir une combinaison que vous devez deviner !\n" +
                 "Chacun joue à tour de rôle jusqu'à trouver en premier la combinaison de l'autre ...\n" +
-                "A vous de jouer ! Bonne chance !");
-
-        System.out.println();
+                "A vous de jouer ! Bonne chance !\n");
 
         //On demande à l'utilisateur de définir une combinaison à deviner par l'ordinateur
         System.out.println("Veuillez réflechir à une combinaison à " + config.getNbDeChiffres() + " chiffres ...");
@@ -34,19 +31,15 @@ public class ModeJeuDuel extends ModeDeJeu {
 
         //On questionne si le mode développeur est activé
         if (config.getModeDev()) {
-
             System.out.println("(nbMystereIA = " + nbMystereIA + ")");
         }
 
         System.out.println();
 
         nbEssais = 0;
-
         //Echange proposition de l'utilisateur - reponse de l'ordinateur
         tourJoueur();
-
         System.out.println();
-
         //Echange proposition de l'ordinateur - reponse de l'utilisateur
         tourIA();
 
@@ -74,7 +67,9 @@ public class ModeJeuDuel extends ModeDeJeu {
                 System.out.print("Désolé ! Vous avez perdu, l'ordinateur a deviné la combinaison avant vous en " + nbEssais + " essai(s)!\n" +
                         "Sa combinaison secrète à trouver était :" + nbMystereIA);
 
-                //Sinon on boucle un nouveau tour de jeu tant qu'il n'y a pas la victoire de l'un ou l'autre
+                System.out.println();
+
+                //Sinon on boucle un nouveau tour de jeuplusoumoins tant qu'il n'y a pas la victoire de l'un ou l'autre
             } else {
 
                 System.out.println();

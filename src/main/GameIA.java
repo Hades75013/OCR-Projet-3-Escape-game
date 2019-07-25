@@ -1,4 +1,4 @@
-package main.java.jeuplusoumoins;
+package main;
 
 
 public class GameIA {
