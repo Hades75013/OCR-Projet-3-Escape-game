@@ -2,8 +2,8 @@ package main.modedejeu;
 
 
 import main.Config;
-import main.GameIA;
 import main.DialogApi;
+import main.GameIA;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -31,7 +31,7 @@ public class ModeDeJeu {
     public ModeDeJeu() {
     }
 
-    //Méthode redéfinie dans les classes filles permettant de lancer les différents modes de jeuplusoumoins
+    //Méthode redéfinie dans les classes filles permettant de lancer les différents modes de jeu
     protected void lancerPartie() {
     }
 
@@ -42,16 +42,13 @@ public class ModeDeJeu {
 
     //Méthode permettant de verifier la saisie correcte de l'utilisateur pour des chiffres
     protected void verifChiffres() {
-
         Scanner sc = new Scanner(System.in);
         boolean exceptionNbDeChiffre;
 
         do {
             exceptionNbDeChiffre = nbDeChiffresOK(propositionJoueur);
-
             if (!exceptionNbDeChiffre) {
                 logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
-
                 System.out.print("Veuillez saisir uniquement 4 chiffres svp : ");
                 propositionJoueur = sc.nextLine();
             }
@@ -60,16 +57,13 @@ public class ModeDeJeu {
 
     //Méthode permettant de verifier la saisie correcte de l'utilisateur pour des signes
     protected void verifSignes() {
-
         Scanner sc = new Scanner(System.in);
         boolean exceptionNbDeSignes;
 
         do {
             exceptionNbDeSignes = nbDeSignesOK(reponseJoueur);
-
             if (!exceptionNbDeSignes) {
                 logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un signe +,- ou = ");
-
                 System.out.print("Veuillez saisir uniquement 4 signes (+,- ou =) svp : ");
                 reponseJoueur = sc.nextLine();
             }
@@ -78,16 +72,13 @@ public class ModeDeJeu {
 
     //Méthode permettant de verifier la saisie correcte de l'utilisateur pour le choix du menu ou de la fin de partie
     protected void verifChoix() {
-
         Scanner sc = new Scanner(System.in);
         boolean exceptionChoix;
 
         do {
             exceptionChoix = choixOK(choix);
-
             if (!exceptionChoix) {
                 logger.info("Mauvaise saisie de l'utilisateur pour le choix de jeu ");
-
                 System.out.print("Veuillez saisir uniquement 1, 2 ou 3 comme valeurs svp : ");
                 choix = sc.nextLine();
             }
@@ -95,9 +86,8 @@ public class ModeDeJeu {
     }
 
 
-    //Méthode permettant de lancer le Mode de jeuplusoumoins
+    //Méthode permettant de lancer le Mode de jeu
     public void menuModeDeJeu() {
-
         config = null;
         try {
             config = new Config();
@@ -106,13 +96,11 @@ public class ModeDeJeu {
         }
 
         choix = dialogApi.choixModeJeu();
-
         verifChoix();
 
         switch (choix) {
             case "1":
                 logger.info("L'utilisateur a décidé de jouer au mode Challenger");
-
                 System.out.println("Vous avez choisi de jouer au mode Challenger");
                 ModeJeuChallenger challenger = new ModeJeuChallenger(config);
                 challenger.lancerPartie();
@@ -120,7 +108,6 @@ public class ModeDeJeu {
 
             case "2":
                 logger.info("L'utilisateur a décidé de jouer au mode Defenseur");
-
                 System.out.println("Vous avez choisi de jouer au mode Defenseur");
                 ModeJeuDefenseur defenseur = new ModeJeuDefenseur(config);
                 defenseur.lancerPartie();
@@ -128,7 +115,6 @@ public class ModeDeJeu {
 
             case "3":
                 logger.info("L'utilisateur a décidé de jouer au mode Duel");
-
                 System.out.println("Vous avez choisi de jouer au mode Duel");
                 ModeJeuDuel duel = new ModeJeuDuel(config);
                 duel.lancerPartie();
@@ -142,27 +128,22 @@ public class ModeDeJeu {
 
     //Méthode permettant de choisir les options de fin de partie
     protected void finDePartie() {
-
         choix = dialogApi.choixFinPartie();
-
         verifChoix();
 
         switch (choix) {
             case "1":
-                logger.info("L'utilisateur a décidé de rejouer au meme mode de jeuplusoumoins");
-
+                logger.info("L'utilisateur a décidé de rejouer au meme mode de jeu");
                 rejouerModeDeJeu();
                 break;
 
             case "2":
-                logger.info("L'utilisateur a décidé de revenir au menu Mode de jeuplusoumoins");
-
+                logger.info("L'utilisateur a décidé de revenir au menu Mode de jeu");
                 menuModeDeJeu();
                 break;
 
             case "3":
-                logger.info("L'utilisateur a décidé de quitter le jeuplusoumoins");
-
+                logger.info("L'utilisateur a décidé de quitter le jeu");
                 System.out.println("Merci d'avoir participé et à bientot !");
                 quitterJeu();
                 break;
@@ -178,7 +159,7 @@ public class ModeDeJeu {
     }
 
 
-    //Méthode permettant de quitter le jeuplusoumoins
+    //Méthode permettant de quitter le jeu
     private void quitterJeu() {
         System.exit(0);
     }

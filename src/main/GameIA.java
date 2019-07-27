@@ -9,11 +9,10 @@ public class GameIA {
 
     //Méthode permettant de comparer la proposition de l'utilisateur avec le nombre mystère généré par l'ordinateur
     public String comparerValeur(String propositionJoueur, String nbMystereIA) {
-
         char[] propositionsJoueur = propositionJoueur.toCharArray();
         String indication = "";
-        int i = 0;
 
+        int i = 0;
         for (int chiffre : propositionsJoueur) {
             int chiffreMystere = nbMystereIA.charAt(i);
 
@@ -40,14 +39,11 @@ public class GameIA {
 
     //Méthode permettant à l'ordinateur de générer une combinaison avec prise en compte des indications de l'utilisateur
     public String genererCombinaisonParametres(String propositionIA, String reponse) {
-
         char[] reponses = reponse.toCharArray();
-
         String nouvelleProposition = "";
         int chiffrePropositionIA;
+
         int i = 0;
-
-
         for (char signe : reponses) {
             chiffrePropositionIA = Integer.parseInt(String.valueOf(propositionIA.charAt(i)));
 

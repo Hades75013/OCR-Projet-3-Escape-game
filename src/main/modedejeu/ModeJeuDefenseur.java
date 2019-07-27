@@ -11,16 +11,12 @@ public class ModeJeuDefenseur extends ModeDeJeu {
     }
 
     public void lancerPartie() {
-
-        //Message d'accueil avec énoncé des règles du mode de jeuplusoumoins
-        System.out.println("Bienvenue dans ce mode de jeuplusoumoins ! Voici l'énoncé des règles : \n" +
+        //Message d'accueil avec énoncé des règles du mode de jeu
+        System.out.println("Bienvenue dans ce mode de jeu ! Voici l'énoncé des règles : \n" +
                 "Vous devez définir une combinaison de " + config.getNbDeChiffres() + " chiffres que l'ordinateur doit deviner en " + config.getNbEssaisMax() + " essais maximum !\n" +
-                "A vous de jouer ! Bonne chance !");
+                "A vous de jouer ! Bonne chance !\n");
 
-
-        System.out.println("Veuillez définir une combinaison de " + config.getNbDeChiffres() + " chiffres ...");
-
-        System.out.println();
+        System.out.println("Veuillez définir une combinaison de " + config.getNbDeChiffres() + " chiffres ...\n");
 
         //Génération de la combinaison aléatoire par l'ordinateur
         propositionIA = String.format("%04d", gameIA.genererCombinaisonAleatoire());
@@ -39,11 +35,11 @@ public class ModeJeuDefenseur extends ModeDeJeu {
             //On incrémente afin d'avoir le nombre d'essais du joueur
             nbEssais++;
 
-            //On affiche le nombre d'essais en cours
-            System.out.println("Essai N° " + nbEssais);
-
             //On affiche le resultat de la comparaison
             dialogApi.afficherResultat(propositionIA, reponseJoueur);
+
+            //On affiche le nombre d'essais en cours
+            System.out.println("Essai N° " + nbEssais+"\n");
 
             //On questionne le booléen sur les conditions de la victoire
             victoireIA = gagneOK(reponseJoueur);
@@ -51,13 +47,10 @@ public class ModeJeuDefenseur extends ModeDeJeu {
             //Si victoire de l'ordinateur au premier essai
             if (victoireIA) {
                 logger.info("victoire de l'ordinateur");
-
                 System.out.print("Désolé, vous avez perdu ! L'ordinateur a réussi à deviner votre combinaison secrète en " + (nbEssais) + " essai(s)\n");
 
                 //Sinon l'ordinateur continue de faire une proposition
             } else if (nbEssais < config.getNbEssaisMax()) {
-
-                System.out.println();
 
                 propositionIA = gameIA.genererCombinaisonParametres(propositionIA, reponseJoueur);
                 System.out.println("Proposition de l'IA : " + propositionIA);
@@ -68,7 +61,6 @@ public class ModeJeuDefenseur extends ModeDeJeu {
         //Si le nombre d'essais max est atteint par l'ordinateur sans avoir deviné la combinaison, l'utilisateur a gagné
         if (nbEssais == config.getNbEssaisMax()) {
             logger.info("victoire de l'utilisateur");
-
             System.out.println("Bravo, vous avez gagné ! L'ordinateur n'a pas réussi à deviner votre combinaison secrète en " + config.getNbEssaisMax() + " essais!");
         }
 
@@ -78,7 +70,6 @@ public class ModeJeuDefenseur extends ModeDeJeu {
         finDePartie();
 
     }
-
 
 }
 
