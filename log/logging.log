@@ -1,0 +1,32 @@
+2019-07-27 14:26:27 INFO  Main:9 - Test
+2019-07-27 14:26:42 INFO  Main:9 - Test
+2019-07-27 14:27:10 INFO  Main:9 - Test
+2019-07-27 14:27:52 ERROR Main:9 - Test
+2019-07-27 14:28:16 ERROR Main:9 - Test HTA
+2019-07-27 14:30:45 INFO  Main:9 - Test HTA
+2019-07-27 14:30:45 DEBUG Config:34 - lecture du fichier log4j.xml
+2019-07-27 14:30:45 DEBUG Config:41 - devMode : false
+2019-07-27 14:30:45 DEBUG Menu:49 - attente de l'entrer utilisateur.
+2019-07-27 14:35:08 WARN  Main:9 - Test HTA
+2019-07-27 14:37:56 DEBUG Main:9 - Test HTA
+2019-07-27 14:37:56 DEBUG Config:34 - lecture du fichier log4j.xml
+2019-07-27 14:37:56 DEBUG Config:41 - devMode : false
+2019-07-27 14:37:56 DEBUG Menu:49 - attente de l'entrer utilisateur.
+2019-07-27 14:38:37 INFO  Main:9 - Test HTA
+2019-07-27 14:38:37 DEBUG Config:34 - lecture du fichier log4j.xml
+2019-07-27 14:38:37 DEBUG Config:41 - devMode : false
+2019-07-27 14:38:37 DEBUG Menu:49 - attente de l'entrer utilisateur.
+2019-07-27 14:39:03 DEBUG Main:9 - Test HTA
+2019-07-27 14:39:03 DEBUG Config:34 - lecture du fichier log4j.xml
+2019-07-27 14:39:03 DEBUG Config:41 - devMode : false
+2019-07-27 14:39:04 DEBUG Menu:49 - attente de l'entrer utilisateur.
+2019-07-27 14:39:33 WARN  Main:9 - Test HTA
+2019-07-27 14:39:33 DEBUG Config:34 - lecture du fichier log4j.xml
+2019-07-27 14:39:33 DEBUG Config:41 - devMode : false
+2019-07-27 14:39:33 DEBUG Menu:49 - attente de l'entrer utilisateur.
+2019-07-27 14:40:09 WARN  Main:9 - Test HTA
+2019-07-27 14:40:09 DEBUG Config:34 - lecture du fichier log4j.xml
+2019-07-27 14:40:09 DEBUG Config:41 - devMode : false
+2019-07-27 14:40:09 DEBUG Menu:49 - attente de l'entrer utilisateur.
+2019-07-27 14:40:30 WARN  Main:9 - Test HTA
+2019-07-27 15:21:58 ERROR Main:18 - on reyest
