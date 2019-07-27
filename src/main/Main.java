@@ -16,7 +16,7 @@ public class Main {
 
         final Logger logger = Logger.getLogger(Main.class);
         logger.error("on reyest");
-        if(true)
+        if(true )
             return;
         Config config;
 
