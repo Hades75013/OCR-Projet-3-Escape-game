@@ -6,7 +6,7 @@ import main.DialogApi;
 import main.GameIA;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
+
 import java.util.Scanner;
 
 import static main.exception.SaisiesException.*;
