@@ -24,9 +24,10 @@
 
     <root>
         <!--LEVEL : OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL -->
-        <level value="WARN" />
+       <level value="DEBUG" />
         <appender-ref ref="console" />
         <appender-ref ref="file" />
+
     </root>
 
 </log4j:configuration>

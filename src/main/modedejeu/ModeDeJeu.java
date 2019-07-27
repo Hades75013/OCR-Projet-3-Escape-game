@@ -4,10 +4,10 @@ package main.modedejeu;
 import main.Config;
 import main.DialogApi;
 import main.GameIA;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 import static main.exception.SaisiesException.*;
 
@@ -48,7 +48,7 @@ public class ModeDeJeu {
         do {
             exceptionNbDeChiffre = nbDeChiffresOK(propositionJoueur);
             if (!exceptionNbDeChiffre) {
-                logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
+                logger.warn("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un chiffre");
                 System.out.print("Veuillez saisir uniquement 4 chiffres svp : ");
                 propositionJoueur = sc.nextLine();
             }
@@ -63,7 +63,7 @@ public class ModeDeJeu {
         do {
             exceptionNbDeSignes = nbDeSignesOK(reponseJoueur);
             if (!exceptionNbDeSignes) {
-                logger.info("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un signe +,- ou = ");
+                logger.warn("Mauvaise saisie de l'utilisateur pour la proposition : nombre de caractère superieur à " + config.getNbDeChiffres() + " ou/et differents d'un signe +,- ou = ");
                 System.out.print("Veuillez saisir uniquement 4 signes (+,- ou =) svp : ");
                 reponseJoueur = sc.nextLine();
             }
@@ -78,7 +78,7 @@ public class ModeDeJeu {
         do {
             exceptionChoix = choixOK(choix);
             if (!exceptionChoix) {
-                logger.info("Mauvaise saisie de l'utilisateur pour le choix de jeu ");
+                logger.warn("Mauvaise saisie de l'utilisateur pour le choix de jeu ");
                 System.out.print("Veuillez saisir uniquement 1, 2 ou 3 comme valeurs svp : ");
                 choix = sc.nextLine();
             }
@@ -88,13 +88,8 @@ public class ModeDeJeu {
 
     //Méthode permettant de lancer le Mode de jeu
     public void menuModeDeJeu() {
-        config = null;
-        try {
-            config = new Config();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        config = new Config();
+        config.chargementConfig();
         choix = dialogApi.choixModeJeu();
         verifChoix();
 
