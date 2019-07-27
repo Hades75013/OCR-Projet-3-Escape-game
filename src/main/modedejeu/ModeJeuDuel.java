@@ -50,15 +50,14 @@ public class ModeJeuDuel extends ModeDeJeu {
 
             //Si victoire de l'un ou de l'autre dès le premier essai
             if (victoireJoueur) {
-                logger.info("Victoire de l'utilisateur");
-                System.out.print("Bravo ! Vous avez gagné, vous avez deviné la combinaison avant l'ordinateur en " + nbEssais + " essai(s) !");
+                logger.info("Victoire de l'utilisateur en "+nbEssais+" essais");
+                System.out.print("Bravo ! Vous avez gagné, vous avez deviné la combinaison avant l'ordinateur en " + nbEssais + " essai(s) \n !");
 
             } else if (victoireIA) {
-                logger.info("Victoire de l'ordinateur");
-                System.out.print("Désolé ! Vous avez perdu, l'ordinateur a deviné la combinaison avant vous en " + nbEssais + " essai(s)!\n" +
-                        "Sa combinaison secrète à trouver était :" + nbMystereIA);
+                logger.info("Victoire de l'ordinateur en "+nbEssais+" essais");
+                System.out.print("Désolé ! Vous avez perdu, l'ordinateur a deviné la combinaison avant vous en " + nbEssais + " essai(s)!" +
+                        "Sa combinaison secrète à trouver était :" + nbMystereIA+" \n");
 
-                System.out.println();
 
                 //Sinon on boucle un nouveau tour de jeu tant qu'il n'y a pas la victoire de l'un ou l'autre
             } else {

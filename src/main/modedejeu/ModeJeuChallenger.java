@@ -52,19 +52,15 @@ public class ModeJeuChallenger extends ModeDeJeu {
 
         } while (!victoireJoueur && nbEssais < config.getNbEssaisMax());
 
-        System.out.println();
-
         if (victoireJoueur) {
-            logger.info("Victoire de l'utilisateur ");
-            System.out.println("Bravo, vous avez gagné en " + nbEssais + " essai(s)! ");
+            logger.info("Victoire de l'utilisateur en "+nbEssais+" essais");
+            System.out.println("Bravo, vous avez gagné en " + nbEssais + " essai(s)!\n");
 
         } else {
             logger.info("Victoire de l'ordinateur ");
             System.out.println("Désolé, vous avez perdu , vous avez épuisez le nombre de tentatives (" + config.getNbEssaisMax() + ") !\n" +
-                    "La combinaison secrète à trouver était : " + nbMystereIA);
+                    "La combinaison secrète à trouver était : " + nbMystereIA+"\n");
         }
-
-        System.out.println();
 
         //On propose à l'utilisateur les options de fin de partie
         finDePartie();

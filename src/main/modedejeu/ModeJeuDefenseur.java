@@ -46,7 +46,7 @@ public class ModeJeuDefenseur extends ModeDeJeu {
 
             //Si victoire de l'ordinateur au premier essai
             if (victoireIA) {
-                logger.info("victoire de l'ordinateur");
+                logger.info("Victoire de l'ordinateur en "+nbEssais+" essais");
                 System.out.print("Désolé, vous avez perdu ! L'ordinateur a réussi à deviner votre combinaison secrète en " + (nbEssais) + " essai(s)\n");
 
                 //Sinon l'ordinateur continue de faire une proposition
@@ -61,10 +61,8 @@ public class ModeJeuDefenseur extends ModeDeJeu {
         //Si le nombre d'essais max est atteint par l'ordinateur sans avoir deviné la combinaison, l'utilisateur a gagné
         if (nbEssais == config.getNbEssaisMax()) {
             logger.info("victoire de l'utilisateur");
-            System.out.println("Bravo, vous avez gagné ! L'ordinateur n'a pas réussi à deviner votre combinaison secrète en " + config.getNbEssaisMax() + " essais!");
+            System.out.println("Bravo, vous avez gagné ! L'ordinateur n'a pas réussi à deviner votre combinaison secrète en " + config.getNbEssaisMax() + " essais!\n");
         }
-
-        System.out.println();
 
         //On propose à l'utilisateur les options de fin de partie
         finDePartie();
